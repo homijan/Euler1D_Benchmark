@@ -87,6 +87,10 @@ BC_RIGHT = BC_FREEFLOW
 # Directorio donde escribir las salidas (usar "./" para dir actual)
 # Debe terminar en una diagonal '/'
 OUT_DIR = "./temp/"
+# Check if OUT_DIR exists, if not create it
+import os
+if OUT_DIR != "" and not os.path.exists(OUT_DIR):
+    os.makedirs(OUT_DIR)
 
 # La "plantilla" para los nombres de archivos de salida, incluyendo
 # el formato para el número de salida
@@ -103,6 +107,14 @@ do_output = True
 DX = (XR-XL)/NX      # Espaciamiento de la malla
 
 xcoords = XL + np.arange(NX+2) * DX
+
+# Lagrangian fluid coordinat a
+# a(t=0) = x
+acoords = np.zeros(NX+2)
+acoords[:] = xcoords[:]
+
+# Action
+action = np.zeros(NX+2)
 
 # ----------------------------------------------------------------------------
 # VARIABLES GLOBALES
@@ -337,7 +349,7 @@ def step(U, UP):
 # ==============================================================================
 
 # Escribe a disco el estado de la simulación
-def output(PRIM):
+def output(PRIM, acoords, action):
 
   global nout, tout
 
@@ -357,7 +369,7 @@ def output(PRIM):
 
     # Escribir los valores de U al archivo (sólo celdas físicas)
     for i in range(1, NX+1):
-      fout.write("{} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i]))
+      fout.write("{} {} {} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i], acoords[i], action[i]))
 
     # Cerrar archivo
     fout.close()
@@ -385,7 +397,7 @@ boundary(U)
 flow2prim(U, PRIM)
 
 # Escribir condición inicial a disco
-output(PRIM)
+output(PRIM, acoords, action)
 
 # Bucle principal
 clock_start = time.time()
@@ -412,9 +424,19 @@ while (t < TFIN):
   # Actualizar las primitivas PRIM usando las nuevas U
   flow2prim(U, PRIM)
 
+  # Update Lagrangian coordinates
+  acoords += - PRIM[1,:] * dt
+  # Update action
+  # dSdt = rho0(x)*(0.5*u^2 - epsilon)
+  # epsilon = PRIM[2,:]/((GAMMA-1)*PRIM[0,:])
+  # and rho0(x) = rho(x) * dxda
+  # hence dxda is required
+  # TODO: use rho0(x) instead of rho(x) bellow
+  action += PRIM[0,:] * (0.5 * PRIM[1,:]**2 - PRIM[2,:]/((GAMMA-1)*PRIM[0,:])) * dt
+
   # Escribir a disco
   if (t >= tout):
-    output(PRIM)
+    output(PRIM, acoords, action)
 
 # Imprimir tiempo transcurrido
 elapsed = time.time() - clock_start
