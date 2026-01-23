@@ -48,13 +48,17 @@ BC_PERIODIC = 4
 
 # Parámetros de la simulación
 NEQ = 3             # Número de ecuaciones
-NX = 5000            # Tamaño de la malla
+NX = 1000           # Tamaño de la malla
 XL = 0.0            # Coordenada física del extremo izquierdo
 XR = 1.0            # Coordenada física del extremo derecho
-TFIN = 0.20         # Tiempo final de integración
+TFIN = 0.28         # Tiempo final de integración
 CFL = 0.9           # Parametro de Courant
-DTOUT = TFIN/10     # Intervalo para escribir a disco
+DTOUT = TFIN/100     # Intervalo para escribir a disco
 GAMMA = 1.4         # Razón de capacidades caloríficas
+
+# Permitir especificar NX desde la línea de comandos
+if len(sys.argv) > 1:
+  NX = int(sys.argv[1])
 
 # Viscosidad artficial, sólo para Macormack
 ETA = 0.1
@@ -89,7 +93,7 @@ OUT_DIR = "./temp/"
 # Por ejemplo, "output_%02i.txt" usará dos cifras (con un 0 si necesario)
 OUT_FNAME = "output_%02i.txt"
 
-do_output = False
+do_output = True
 
 # ============================================================================
 # NO ES NECESARIO MODIFICAR NADA DEBAJO DE ESTA LÍNEA
@@ -385,10 +389,13 @@ output(PRIM)
 
 # Bucle principal
 clock_start = time.time()
+it = 0
 while (t < TFIN):
 
   # Calcular el paso de tiempo
   dt = timestep(PRIM)
+  print(f'it {it}, dt {dt}')
+  it += 1
 
   # Actualizar flujos físicos
   fluxes(PRIM, F)

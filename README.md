@@ -1,3 +1,25 @@
+# Example
+
+Execute the 1D ideal fluid shock tube simulation (generates 100 snapthots by default)
+
+`python Euler1D_numpy.py 1000`
+
+where the input parameter `1000` sets number of mesh cells.
+
+Visualization of the output:
+
+`python plot_Euler1D.py temp/output_00.txt`
+
+`python plot_Euler1D.py temp/output_20.txt`
+
+`python plot_Euler1D.py temp/output_40.txt`
+
+`python plot_Euler1D.py temp/output_60.txt`
+
+`python plot_Euler1D.py temp/output_80.txt`
+
+`python plot_Euler1D.py temp/output_100.txt`
+
 # Euler1D Benchmark
 A comparison of various programming languages solving a 1D hydrodynamics problem.
 
