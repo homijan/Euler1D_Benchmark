@@ -26,7 +26,23 @@ $`\begin{equation}
 \frac{d \mathcal{S}}{d t}(x, t) = \left(\partial_a x\right)(x, t) \rho(x, t) \left( \frac{1}{2}v(x, t)^2 - \varepsilon(x, t) \right),~(1)
 \end{equation}`$
 
-where $`\varepsilon = \frac{p}{(\gamma - 1) \rho}`$
+where specific internal energy
+
+$`\begin{equation}
+\varepsilon = \frac{p}{(\gamma - 1) \rho},~(2)
+\end{equation}`$
+
+and fluid coordinate evolves as
+
+$`\begin{equation}
+\partial_t a(x, t) = - v(x, t),~(3)
+\end{equation}`$
+
+and we approximate $`\partial_a x`$ in the lab frame as
+
+$`\begin{equation}
+\left( \partial_a x \right)(x_i) \approx \frac{x_{i+1} - x_i}{a(x_{i+1}) - a(x_i)}.~(4)
+\end{equation}`$
 
 ## Ideal fluid example
 
