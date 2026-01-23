@@ -48,13 +48,17 @@ BC_PERIODIC = 4
 
 # Parámetros de la simulación
 NEQ = 3             # Número de ecuaciones
-NX = 5000            # Tamaño de la malla
+NX = 1000           # Tamaño de la malla
 XL = 0.0            # Coordenada física del extremo izquierdo
 XR = 1.0            # Coordenada física del extremo derecho
-TFIN = 0.20         # Tiempo final de integración
+TFIN = 0.28         # Tiempo final de integración
 CFL = 0.9           # Parametro de Courant
-DTOUT = TFIN/10     # Intervalo para escribir a disco
+DTOUT = TFIN/100     # Intervalo para escribir a disco
 GAMMA = 1.4         # Razón de capacidades caloríficas
+
+# Permitir especificar NX desde la línea de comandos
+if len(sys.argv) > 1:
+  NX = int(sys.argv[1])
 
 # Viscosidad artficial, sólo para Macormack
 ETA = 0.1
@@ -83,13 +87,17 @@ BC_RIGHT = BC_FREEFLOW
 # Directorio donde escribir las salidas (usar "./" para dir actual)
 # Debe terminar en una diagonal '/'
 OUT_DIR = "./temp/"
+# Check if OUT_DIR exists, if not create it
+import os
+if OUT_DIR != "" and not os.path.exists(OUT_DIR):
+    os.makedirs(OUT_DIR)
 
 # La "plantilla" para los nombres de archivos de salida, incluyendo
 # el formato para el número de salida
 # Por ejemplo, "output_%02i.txt" usará dos cifras (con un 0 si necesario)
 OUT_FNAME = "output_%02i.txt"
 
-do_output = False
+do_output = True
 
 # ============================================================================
 # NO ES NECESARIO MODIFICAR NADA DEBAJO DE ESTA LÍNEA
@@ -99,6 +107,14 @@ do_output = False
 DX = (XR-XL)/NX      # Espaciamiento de la malla
 
 xcoords = XL + np.arange(NX+2) * DX
+
+# Lagrangian fluid coordinat a
+# a(t=0) = x
+acoords = np.zeros(NX+2)
+acoords[:] = xcoords[:]
+dxda = np.zeros(NX+2)
+# Action
+action = np.zeros(NX+2)
 
 # ----------------------------------------------------------------------------
 # VARIABLES GLOBALES
@@ -333,7 +349,7 @@ def step(U, UP):
 # ==============================================================================
 
 # Escribe a disco el estado de la simulación
-def output(PRIM):
+def output(PRIM, acoords, dxda, action):
 
   global nout, tout
 
@@ -353,7 +369,7 @@ def output(PRIM):
 
     # Escribir los valores de U al archivo (sólo celdas físicas)
     for i in range(1, NX+1):
-      fout.write("{} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i]))
+      fout.write("{} {} {} {} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i], acoords[i], dxda[i], action[i]))
 
     # Cerrar archivo
     fout.close()
@@ -381,14 +397,17 @@ boundary(U)
 flow2prim(U, PRIM)
 
 # Escribir condición inicial a disco
-output(PRIM)
+output(PRIM, acoords, dxda, action)
 
 # Bucle principal
 clock_start = time.time()
+it = 0
 while (t < TFIN):
 
   # Calcular el paso de tiempo
   dt = timestep(PRIM)
+  print(f'it {it}, dt {dt}')
+  it += 1
 
   # Actualizar flujos físicos
   fluxes(PRIM, F)
@@ -405,9 +424,20 @@ while (t < TFIN):
   # Actualizar las primitivas PRIM usando las nuevas U
   flow2prim(U, PRIM)
 
+  # Update Lagrangian coordinates
+  acoords += - PRIM[1,:] * dt
+  # Update action as
+  # dSdt = rho0(x)*(0.5*u^2 - epsilon)
+  # where fluid velocity u, specific internal energy epsilon = pressure / (gamma - 1) / rho,
+  # and rho0(x) = rho(x) * dxda.
+  # Compute dxda = dx / da
+  # using right finite difference dxda[i] = dx / (a[i+1]-a[i])
+  dxda[0:-1] = DX / (acoords[1:] - acoords[:-1])
+  action += dxda * PRIM[0,:] * (0.5 * PRIM[1,:]**2 - PRIM[2,:]/((GAMMA-1)*PRIM[0,:])) * dt
+
   # Escribir a disco
   if (t >= tout):
-    output(PRIM)
+    output(PRIM, acoords, dxda, action)
 
 # Imprimir tiempo transcurrido
 elapsed = time.time() - clock_start
