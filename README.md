@@ -20,6 +20,13 @@ Visualization of the output:
 
 `python plot_Euler1D.py temp/output_100.txt`
 
+## Action update
+
+$`\begin{equation}
+\frac{d \mathcal{S}}{d t}(x, t) = \left(\partial_a x\right)(x, t) \rho(x, t) \left( \frac{1}{2}v(x, t)^2 - \varepsilon(x, t) \right),~(1)
+\end{equation}`$
+
+where $`\varepsilon = \frac{p}{(\gamma - 1) \rho}`$
 
 ## Ideal fluid example
 
