@@ -112,7 +112,7 @@ xcoords = XL + np.arange(NX+2) * DX
 # a(t=0) = x
 acoords = np.zeros(NX+2)
 acoords[:] = xcoords[:]
-
+dxda = np.zeros(NX+2)
 # Action
 action = np.zeros(NX+2)
 
@@ -349,7 +349,7 @@ def step(U, UP):
 # ==============================================================================
 
 # Escribe a disco el estado de la simulación
-def output(PRIM, acoords, action):
+def output(PRIM, acoords, dxda, action):
 
   global nout, tout
 
@@ -369,7 +369,7 @@ def output(PRIM, acoords, action):
 
     # Escribir los valores de U al archivo (sólo celdas físicas)
     for i in range(1, NX+1):
-      fout.write("{} {} {} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i], acoords[i], action[i]))
+      fout.write("{} {} {} {} {} {} {}\n".format(xcoords[i], PRIM[0,i], PRIM[1,i], PRIM[2,i], acoords[i], dxda[i], action[i]))
 
     # Cerrar archivo
     fout.close()
@@ -397,7 +397,7 @@ boundary(U)
 flow2prim(U, PRIM)
 
 # Escribir condición inicial a disco
-output(PRIM, acoords, action)
+output(PRIM, acoords, dxda, action)
 
 # Bucle principal
 clock_start = time.time()
@@ -426,17 +426,18 @@ while (t < TFIN):
 
   # Update Lagrangian coordinates
   acoords += - PRIM[1,:] * dt
-  # Update action
+  # Update action as
   # dSdt = rho0(x)*(0.5*u^2 - epsilon)
-  # epsilon = PRIM[2,:]/((GAMMA-1)*PRIM[0,:])
-  # and rho0(x) = rho(x) * dxda
-  # hence dxda is required
-  # TODO: use rho0(x) instead of rho(x) bellow
-  action += PRIM[0,:] * (0.5 * PRIM[1,:]**2 - PRIM[2,:]/((GAMMA-1)*PRIM[0,:])) * dt
+  # where fluid velocity u, specific internal energy epsilon = pressure / (gamma - 1) / rho,
+  # and rho0(x) = rho(x) * dxda.
+  # Compute dxda = dx / da
+  # using right finite difference dxda[i] = dx / (a[i+1]-a[i])
+  dxda[0:-1] = DX / (acoords[1:] - acoords[:-1])
+  action += dxda * PRIM[0,:] * (0.5 * PRIM[1,:]**2 - PRIM[2,:]/((GAMMA-1)*PRIM[0,:])) * dt
 
   # Escribir a disco
   if (t >= tout):
-    output(PRIM, acoords, action)
+    output(PRIM, acoords, dxda, action)
 
 # Imprimir tiempo transcurrido
 elapsed = time.time() - clock_start
