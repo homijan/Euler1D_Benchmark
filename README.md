@@ -1,3 +1,7 @@
+# TODO: simulation set
+
+
+
 # Example
 
 Execute the 1D ideal fluid shock tube simulation (generates 100 snapthots by default)
