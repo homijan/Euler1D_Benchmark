@@ -1,6 +1,19 @@
 # TODO: simulation set
 
+The goal is to run an ensemble of simulations to "describe" the Hilbert space of action of supersonic ideal fluid (Euler equations).
 
+* Let's run simulations with a different total energy, which can be achieved by varying left pressure $`pL \in (0.5, 1.0) (Sod shock tube uses `pL = 1.0` and `pR = 0.1`). Initial velocity and density remain untouched.
+
+Second parameter to vary is the resolution of the simulation, which will lead to a scan over different viscosity strength.
+
+## Suggestions
+
+Let's shoot for
+* 20 steps of $`pL \in (0.5, 1.0)`$
+* 20 steps of number of cells $`\in (500, 2500)`$
+which will lead to 400 datapoints.
+
+Note, that our Hilbert space should be independent of the resolution of the simulation, so we will want to map (interpolate) the action fields on a common grid (2500 cells makes sense).
 
 # Example
 
