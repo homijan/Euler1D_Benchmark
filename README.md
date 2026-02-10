@@ -11,6 +11,7 @@ Second parameter to vary is the resolution of the simulation, which will lead to
 Let's shoot for
 * 20 steps of $`pL \in (0.5, 1.0)`$
 * 20 steps of number of cells $`\in (500, 2500)`$
+
 which will lead to 400 datapoints.
 
 Note, that our Hilbert space should be independent of the resolution of the simulation, so we will want to map (interpolate) the action fields on a common grid (2500 cells makes sense).
