@@ -16,6 +16,10 @@ which will lead to 400 datapoints.
 
 Note, that our Hilbert space should be independent of the resolution of the simulation, so we will want to map (interpolate) the action fields on a common grid (2500 cells makes sense).
 
+## Entropy analysis
+
+$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are constants. TODO: express from T0, P0, rho0.
+
 # Example
 
 Execute the 1D ideal fluid shock tube simulation (generates 100 snapthots by default)
