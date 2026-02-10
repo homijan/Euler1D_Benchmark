@@ -18,7 +18,10 @@ Note, that our Hilbert space should be independent of the resolution of the simu
 
 ## Entropy analysis
 
-$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are constants. TODO: express from T0, P0, rho0.
+* Plot $`\frac{p(a), t}{\rho(a. t)^\gamma}`$ with respect to the fluid coorsinate $`a`$ throughout the time evolution.
+
+The above quantity directly describes the growth of specific entropy, which can be derived from
+$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants.
 
 # Example
 
