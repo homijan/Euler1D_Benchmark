@@ -19,6 +19,7 @@ Note, that our Hilbert space should be independent of the resolution of the simu
 ## Entropy analysis
 
 * Plot $`\frac{p(a), t}{\rho(a. t)^\gamma}`$ with respect to the fluid coorsinate $`a`$ throughout the time evolution.
+* Compare `plt.plot(x, p / rho**gamma, 'kx')` and `plot(a, p / rho**gamma, 'rx')` to see the difference of the laboratory and fluid frames, respectively.
 
 The above quantity directly describes the growth of specific entropy, which can be derived from
 $`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants.
