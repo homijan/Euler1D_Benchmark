@@ -26,7 +26,11 @@ $`p(\rho, s) = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are l
 
 Also $`T = \frac{\partial \varepsilon(\rho, s)}{\partial s} = \frac{\lambda c \rho^{\gamma-1}}{(\gamma - 1)}\exp(\lambda s) = \lambda \varepsilon`$ [1], and because for the ideal gas $`\rho \varepsilon = \frac{1}{\gamma - 1} n k_B T`$ [J/cm$`^3`$], we get $`\lambda = \frac{\gamma - 1}{k_B} \frac{\rho}{n} = \frac{m_p (\gamma - 1)}{k_B} = \frac{m_p}{C_v k_B}`$, as $C_v = \frac{1}{\gamma - 1}$ for the ideal gas and where $`m_p`$ is mass of one particle.
 
+### Ideal gas entropy
 
+From first law of thermodynamics
+
+$`dU = T dS - p dV \Rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU = C_v dT}{\Rightarrow} dS = \frac{C_v}{T} dT + \frac{p}{T} dV`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
