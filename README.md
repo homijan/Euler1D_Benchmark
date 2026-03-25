@@ -21,8 +21,13 @@ Note, that our Hilbert space should be independent of the resolution of the simu
 * Plot $`\frac{p(a, t)}{\rho(a, t)^\gamma}`$ with respect to the fluid coorsinate $`a`$ throughout the time evolution.
 * Compare `plt.plot(x, p / rho**gamma, 'kx')` and `plot(a, p / rho**gamma, 'rx')` to see the difference of the laboratory and fluid frames, respectively.
 
-The above quantity directly describes the growth of specific entropy, which can be derived from
-$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants.
+The above quantity directly describes the growth of specific entropy for the ideal gas, which can be derived from
+$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants [1]. As $`p = (\gamma - 1) \rho \varepsilon`$, we can write $`s = \frac{1}{\lambda} \log\left( \frac{(\gamma - 1) \varepsilon}{c \rho^{\gamma-1}} \right)`$.
+
+
+
+[1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
+accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
 
 # Example
 
