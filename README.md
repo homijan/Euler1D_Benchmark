@@ -22,7 +22,9 @@ Note, that our Hilbert space should be independent of the resolution of the simu
 * Compare `plt.plot(x, p / rho**gamma, 'kx')` and `plot(a, p / rho**gamma, 'rx')` to see the difference of the laboratory and fluid frames, respectively.
 
 The above quantity directly describes the growth of specific entropy for the ideal gas, which can be derived from
-$`p = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants [1]. As $`p = (\gamma - 1) \rho \varepsilon`$, we can write $`s = \frac{1}{\lambda} \log\left( \frac{(\gamma - 1) \varepsilon}{c \rho^{\gamma-1}} \right)`$.
+$`p(\rho, s) = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants [1]. As $`p(\rho, \varepsilon) = (\gamma - 1) \rho \varepsilon`$, we can write $`s = \frac{1}{\lambda} \log\left( \frac{(\gamma - 1) \varepsilon}{c \rho^{\gamma-1}} \right)`$. Also $`\varepsilon(\rho, s) = \frac{p(\rho, s)}{(\gamma - 1) \rho} = \frac{c \rho^\gamma \exp(\lambda s)}{(\gamma - 1) \rho} = \frac{c \rho^{\gamma-1}}{(\gamma - 1)}\exp(\lambda s)`$.
+
+Also $`T = \frac{\partial \varepsilon(\rho, s)}{\partial s}`$ [1].
 
 
 
