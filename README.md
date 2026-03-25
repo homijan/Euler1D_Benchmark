@@ -34,7 +34,7 @@ $`dU = T dS - p dV \rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU 
 
 which leads to
 
-$`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const`$ [entropy/cm$`^3`$]
+$`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const = \rho s`$ [entropy/cm$`^3`$], where $`s`$ [entropy/g] is specific entropy
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
