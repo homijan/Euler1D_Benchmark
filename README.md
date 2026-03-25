@@ -37,7 +37,7 @@ which leads to
 $`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const = \rho s`$ [entropy/cm$`^3`$], where $`s`$ [entropy/g] is specific entropy, can be expressed as $`s = \frac{k_B}{m_p} \log\left(V T^{c_v} \right) + const`$. Now using $`\frac{\rho}{m_p} = n = \frac{N}{V}`$ and $`\rho \varepsilon = \frac{U}{V} = c_v n k_B T \rightarrow T = \frac{\rho \varepsilon}{c_v n k_B} = \frac{m_p}{c_v k_B} \varepsilon`$, we get specific entropy $`s = \frac{k_B}{m_p} \log\left( \frac{\varepsilon^{c_v}}{\rho} N m_p \left( \frac{m_p}{c_v k_B} \right)^{c_v} \right) + const \overset{c_v = \frac{1}{\gamma - 1}}{\Rightarrow} s = \frac{k_B}{m_p} \log\left( \frac{\varepsilon^{\frac{1}{\gamma - 1}}}{\rho} \right) + const(T_0, V_0, N, c_v, k_B, m_p)`$. The last formulation of specific entropy can be rewritten using $`\varepsilon = \frac{p}{(\gamma - 1) \rho}`$
 
 $`\begin{equation}
-s = \frac{k_B}{m_p} \log\left( \frac{p^{\frac{1}{\gamma - 1}}}{\rho^{\frac{\gamma}{\gamma - 1}}} \right) + const(T_0, V_0, N, c_v, k_B, m_p)
+s = \frac{k_B}{m_p} \log\left( \frac{p^{\frac{1}{\gamma - 1}}}{\rho^{\frac{\gamma}{\gamma - 1}}} \right) + const(T_0, V_0, N, c_v, k_B, m_p) = \frac{k_B}{m_p}\frac{1}{\gamma - 1} \log\left( \frac{p}{\rho^\gamma} \right) + const(T_0, V_0, N, c_v, k_B, m_p)
 \end{equation}`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
