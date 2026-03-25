@@ -30,7 +30,7 @@ Also $`T = \frac{\partial \varepsilon(\rho, s)}{\partial s} = \frac{\lambda c \r
 
 From first law of thermodynamics
 
-$`dU = T dS - p dV \Rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU = C_v dT}{\Rightarrow} dS = \frac{C_v}{T} dT + \frac{p}{T} dV`$
+$`dU = T dS - p dV \Rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU = C_v dT}{\Rightarrow} dS = \frac{C_v}{T} dT + \frac{p}{T} dV \overset{p V = N k_B T}{\Rightarrow} dS = \frac{C_v}{T} dT + \frac{N k_B}{V} dV`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
