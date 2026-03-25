@@ -28,9 +28,13 @@ Also $`T = \frac{\partial \varepsilon(\rho, s)}{\partial s} = \frac{\lambda c \r
 
 ### Ideal gas entropy
 
-From first law of thermodynamics
+From first law of thermodynamics and properties of the ideal gas
 
 $`dU = T dS - p dV \rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU = c_v N k_B dT}{\rightarrow} dS = \frac{c_v N k_B}{T} dT + \frac{p}{T} dV \overset{p V = N k_B T}{\rightarrow} dS = \frac{c_v N k_B}{T} dT + \frac{N k_B}{V} dV \overset{integration}{\Rightarrow} S = [c_v N k_B \log(T)]_{T_0}^T + [N k_B \log(V)]_{V_0}^V`$
+
+which leads to
+
+$`S = N k_B \left( \log\left( T^{c_v} \right) + \log(V)) + const(N, T_0, V_0)`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
