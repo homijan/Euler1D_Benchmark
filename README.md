@@ -34,7 +34,7 @@ $`dU = T dS - p dV \rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU 
 
 which leads to
 
-$`S = N k_B \left( \log\left( T^{c_v} \right) + \log(V) \right) + const(N, T_0, V_0)`$
+$`S = N k_B \left( \log\left( T^{c_v} \right) + \log(V) \right) + const(T_0, V_0, N, c_v)`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
