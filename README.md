@@ -34,7 +34,7 @@ $`dU = T dS - p dV \rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU 
 
 which leads to
 
-$`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const = \rho s`$ [entropy/cm$`^3`$], where $`s`$ [entropy/g] is specific entropy, can be expressed as $`s = \frac{k_B}{m_p} \log\left(V T^{c_v} \right) + const`$. Now using $`\frac{\rho}{m_p} = n = \frac{N}{V}`$ and $`\rho \varepsilon = \frac{U}{V} = c_v n k_B T \rightarrow T = \frac{\rho \varepsilon}{c_v n k_B} = \frac{m_p}{c_v k_B} \varepsilon`$
+$`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const = \rho s`$ [entropy/cm$`^3`$], where $`s`$ [entropy/g] is specific entropy, can be expressed as $`s = \frac{k_B}{m_p} \log\left(V T^{c_v} \right) + const`$. Now using $`\frac{\rho}{m_p} = n = \frac{N}{V}`$ and $`\rho \varepsilon = \frac{U}{V} = c_v n k_B T \rightarrow T = \frac{\rho \varepsilon}{c_v n k_B} = \frac{m_p}{c_v k_B} \varepsilon`$, we get specific entropy $`s = \frac{k_B}{m_p} \log\left( \frac{\varepsilon^{c_v}}{\rho} N m_p \left( \frac{m_p}{c_v k_B} \right)^c_v \right) + const`$
 
 [1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
 accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
