@@ -1,3 +1,46 @@
+# TODO: simulation set
+
+The goal is to run an ensemble of simulations to "describe" the Hilbert space of action of supersonic ideal fluid (Euler equations).
+
+* Let's run simulations with a different total energy, which can be achieved by varying left pressure $`pL \in (0.5, 1.0) (Sod shock tube uses `pL = 1.0` and `pR = 0.1`). Initial velocity and density remain untouched.
+
+Second parameter to vary is the resolution of the simulation, which will lead to a scan over different viscosity strength.
+
+## Suggestions
+
+Let's shoot for
+* 20 steps of $`pL \in (0.5, 1.0)`$
+* 20 steps of number of cells $`\in (500, 2500)`$
+
+which will lead to 400 datapoints.
+
+Note, that our Hilbert space should be independent of the resolution of the simulation, so we will want to map (interpolate) the action fields on a common grid (2500 cells makes sense).
+
+## Entropy analysis
+
+* Plot $`\frac{p(a, t)}{\rho(a, t)^\gamma}`$ with respect to the fluid coorsinate $`a`$ throughout the time evolution.
+* Compare `plt.plot(x, p / rho**gamma, 'kx')` and `plot(a, p / rho**gamma, 'rx')` to see the difference of the laboratory and fluid frames, respectively.
+
+The above quantity directly describes the growth of specific entropy for the ideal gas, which can be derived from
+$`p(\rho, s) = c \rho^\gamma \exp(\lambda s)`$ where $`c`$ and $`\lambda`$ are local constants [1], which are explicitely demostrated in derivation leading to (e1).
+
+### Ideal gas entropy
+
+From first law of thermodynamics and properties of the ideal gas
+
+$`dU = T dS - p dV \rightarrow dS = \frac{1}{T} dU + \frac{p}{T} dV \overset{dU = c_v N k_B dT}{\rightarrow} dS = \frac{c_v N k_B}{T} dT + \frac{p}{T} dV \overset{p V = N k_B T}{\rightarrow} dS = \frac{c_v N k_B}{T} dT + \frac{N k_B}{V} dV \overset{integration}{\Rightarrow} S = [c_v N k_B \log(T)]_{T_0}^T + [N k_B \log(V)]_{V_0}^V`$
+
+which leads to
+
+$`S = N k_B \log\left(V T^{c_v} \right) + const(T_0, V_0, N, c_v) \overset{density}{\rightarrow} \frac{S}{V} = n k_B \log\left(V T^{c_v} \right) + const = \rho s`$ [entropy/cm$`^3`$], where $`s`$ [entropy/g] is specific entropy, can be expressed as $`s = \frac{k_B}{m_p} \log\left(V T^{c_v} \right) + const`$. Now using $`\frac{\rho}{m_p} = n = \frac{N}{V}`$ and $`\rho \varepsilon = \frac{U}{V} = c_v n k_B T \rightarrow T = \frac{\rho \varepsilon}{c_v n k_B} = \frac{m_p}{c_v k_B} \varepsilon`$, we get specific entropy $`s = \frac{k_B}{m_p} \log\left( \frac{\varepsilon^{c_v}}{\rho} N m_p \left( \frac{m_p}{c_v k_B} \right)^{c_v} \right) + const \overset{c_v = \frac{1}{\gamma - 1}}{\Rightarrow} s = \frac{k_B}{m_p} \log\left( \frac{\varepsilon^{\frac{1}{\gamma - 1}}}{\rho} \right) + const(T_0, V_0, N, c_v, k_B, m_p)`$. The last formulation of specific entropy can be rewritten using $`\varepsilon = \frac{p}{(\gamma - 1) \rho}`$
+
+$`\begin{equation}
+s = \frac{k_B}{m_p} \log\left( \frac{p^{\frac{1}{\gamma - 1}}}{\rho^{\frac{\gamma}{\gamma - 1}}} \right) + const(T_0, V_0, N, c_v, k_B, m_p) = \frac{k_B}{m_p}\frac{1}{\gamma - 1} \log\left( \frac{p}{\rho^\gamma} \right) + const(T_0, V_0, N, c_v, k_B, m_p).~(e1)
+\end{equation}`$
+
+[1] Hamiltonian magnetohydrodynamics: Lagrangian, Eulerian, and dynamically
+accessible stability—Examples with translation symmetry, PHYSICS OF PLASMAS 23, 102112 (2016).
+
 # Example
 
 Execute the 1D ideal fluid shock tube simulation (generates 100 snapthots by default)
